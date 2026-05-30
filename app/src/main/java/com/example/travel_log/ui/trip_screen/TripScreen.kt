@@ -2,7 +2,6 @@ package com.example.travel_log.ui.trip_screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,217 +9,203 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.travel_log.ui.component.TripCard
 import com.example.travel_log.ui.navigation.BottomBar
 
 @Composable
-fun TripsScreen(navController: NavController) {
+fun MyTripsScreen(
+    navController: NavController,
+    // ViewModel provides Room DB data
+    viewModel: TripsViewModel = hiltViewModel() // Gets ViewModel automatically from Hilt
+) {
+    //Collect planned trips from StateFlow
+    val plannedTrips by viewModel.plannedTrips.collectAsState()
+    // Collect wishlist trips
+    val wishlistTrips by viewModel.wishlistTrips.collectAsState()
+    val visitedTrips by viewModel.visitedTrips.collectAsState()
+    // Dynamic counts
+    val plannedCount by viewModel.plannedCount.collectAsState()
+    val wishlistCount by viewModel.wishlistCount.collectAsState()
+    val visitedCount by viewModel.visitedCount.collectAsState()
+    // Current selected tab
+    var selectedTab by remember { mutableStateOf(0) }
+
+    // Screen layout
     Scaffold(
-        bottomBar ={ BottomBar(navController)}
-    ) {paddingValues ->
+        bottomBar = { BottomBar(navController) }
+    ) { paddingValues -> // prevents UI overlapping
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color(0xFFF3F8F6))
+            modifier = Modifier // modifier customizes UI
+                .fillMaxSize() // occupy full screen
                 .padding(paddingValues)
+                .padding(horizontal = 20.dp)
         ) {
+            Spacer(modifier = Modifier.height(20.dp))
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Header
+            // Screen title
             Text(
                 text = "My Trips",
-                fontSize = 24.sp,
+                style = MaterialTheme.typography.headlineMedium, // apply predefined typography style
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF1F2D2B),
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
-
-            Text(
-                text = "14 countries · 32 trips",
-                fontSize = 14.sp,
-                color = Color.Gray,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
-
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Stats Card
-            TripStatsCard()
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            // Tabs
-            TripTabs()
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Trips List
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+            // Top statistics card
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        Color(0xFF006D5B),
+                        RoundedCornerShape(20.dp)
+                    )
+                    .padding(vertical = 24.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                item {
-                    TripItem(
-                        title = "Tokyo Adventure",
-                        subtitle = "Japan · Mar 15 - Mar 28",
-                        days = "PLANNED · 12 days",
-                        flagColor = Color(0xFF4FA4A0)
-                    )
-                }
-                item {
-                    TripItem(
-                        title = "Italy Wine Tour",
-                        subtitle = "Tuscany · May 10 - May 20",
-                        days = "PLANNED · 10 days",
-                        flagColor = Color(0xFFE2A16D)
-                    )
-                }
-                item {
-                    TripItem(
-                        title = "NZ Road Trip",
-                        subtitle = "South Island · Jul 5 - Jul 22",
-                        days = "PLANNED · 17 days",
-                        flagColor = Color(0xFF6AAADF)
-                    )
+
+                // Planned count
+                StatsItem(
+                    count = plannedCount,
+                    label = "Planned"
+                )
+                // Wishlist count
+                StatsItem(
+                    count = wishlistCount,
+                    label = "Wishlist"
+                )
+                // visited count
+                StatsItem(
+                    count = visitedCount,
+                    label = "Visited"
+                )
+            }
+            Spacer(modifier = Modifier.height(24.dp))
+
+            //  Create Tabs layout
+            TabRow(
+                selectedTabIndex = selectedTab, // use for current selected tab
+                containerColor = Color.Transparent
+            ) {
+                Tab(
+                    selected = selectedTab == 0, // Checks if Planned tab selected
+                    onClick = {
+                        selectedTab = 0
+                    },
+                    text = {
+                        Text("Planned")
+                    }
+                )
+                Tab(
+                    selected = selectedTab == 1,
+                    onClick = {
+                        selectedTab = 1
+                    },
+                    text = {
+                        Text("Wishlist")
+                    }
+                )
+                Tab(
+                    selected = selectedTab == 2,
+                    onClick = {
+                        selectedTab = 2
+                    },
+                    text = {
+                        Text("visited")
+                    }
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+           ) {
+                when(selectedTab){
+
+                    // Planned Tab
+                    0 -> {  // Shows planned trips
+
+                        items(plannedTrips){ trip -> // current item
+
+                            TripCard(
+                                trip = trip,
+                                buttonText = "Mark as Visited",
+                                onButtonClick = {
+                                    viewModel.moveToVisited(trip)
+                                }
+                            )
+                        }
+                    }
+
+                    // Wishlist Tab
+                    1 -> {
+
+                        items(wishlistTrips){ trip ->
+
+                            TripCard(
+                                trip = trip,
+                                buttonText = "Plan Trip",
+                                onButtonClick = {
+                                    viewModel.moveToPlanned(trip)
+                                }
+                            )
+                        }
+                    }
+
+                    // Visited Tab
+                    2 -> {
+
+                        items(visitedTrips){ trip ->
+
+                            TripCard(
+                                trip = trip,
+                                buttonText = "",
+                                onButtonClick = { }
+                            )
+                        }
+                    }
                 }
             }
         }
     }
 }
-
-
+// Reusable statistics item
 @Composable
-fun TripStatsCard() {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF2E5B55)),
-        shape = RoundedCornerShape(14.dp)
+fun StatsItem( count: Int, label: String ) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            StatItem("14", "Visited")
-            StatItem("3", "Planned")
-            StatItem("28", "Cities")
-        }
-    }
-}
-
-@Composable
-fun StatItem(value: String, label: String) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        // Count text
         Text(
-            text = value,
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
+            text = count.toString(),
+            color = Color.White,
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold
         )
+        Spacer(modifier = Modifier.height(4.dp))
+        // Label text
         Text(
             text = label,
-            fontSize = 12.sp,
-            color = Color.White.copy(alpha = 0.8f)
+            color = Color.White
         )
-    }
-}
-
-@Composable
-fun TripTabs() {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Start
-    ) {
-        TabText("Planned", selected = true)
-        Spacer(modifier = Modifier.width(24.dp))
-        TabText("Visited", selected = false)
-        Spacer(modifier = Modifier.width(24.dp))
-        TabText("Wishlist", selected = false)
-    }
-}
-
-@Composable
-fun TabText(text: String, selected: Boolean) {
-    Column {
-        Text(
-            text = text,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Medium,
-            color = if (selected) Color(0xFF2E5B55) else Color.Gray
-        )
-        if (selected) {
-            Spacer(modifier = Modifier.height(4.dp))
-            Box(
-                modifier = Modifier
-                    .height(2.dp)
-                    .width(24.dp)
-                    .background(Color(0xFF2E5B55))
-            )
-        }
-    }
-}
-
-@Composable
-fun TripItem(
-    title: String,
-    subtitle: String,
-    days: String,
-    flagColor: Color
-) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
-    ) {
-        Row(
-            modifier = Modifier.padding(14.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            // Flag Placeholder
-            Box(
-                modifier = Modifier
-                    .size(48.dp)
-                    .background(flagColor, RoundedCornerShape(10.dp))
-            )
-
-            Spacer(modifier = Modifier.width(12.dp))
-
-            Column {
-                Text(
-                    text = title,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF1F2D2B)
-                )
-                Text(
-                    text = subtitle,
-                    fontSize = 12.sp,
-                    color = Color.Gray
-                )
-                Text(
-                    text = days,
-                    fontSize = 12.sp,
-                    color = Color(0xFFE76F51),
-                    fontWeight = FontWeight.SemiBold
-                )
-            }
-        }
     }
 }

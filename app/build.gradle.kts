@@ -1,8 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
-    // Room db
+
+    //For DB
     id("com.google.devtools.ksp")
+    // Hilt
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -52,6 +55,9 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.firebase.annotations)
     implementation(libs.androidx.ui)
+    implementation(libs.ui)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui.graphics)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -59,11 +65,6 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-
-    // Room db
-    val room_version = "2.8.4"
-    implementation("androidx.room:room-runtime:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -76,7 +77,6 @@ dependencies {
     // View Model
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
 
-
     implementation("io.coil-kt:coil-compose:2.6.0")
 
     // FOR Analytics bottom bar
@@ -84,4 +84,14 @@ dependencies {
 
     // For navigation
     implementation("androidx.navigation:navigation-compose:2.9.8")
+
+    //For Room DB
+    implementation("androidx.room:room-runtime:2.8.4")
+    ksp("androidx.room:room-compiler:2.8.4")
+
+    // Hilt
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel-compose:1.3.0")
+    implementation("com.google.dagger:hilt-android:2.59.2")
+    ksp("com.google.dagger:hilt-android-compiler:2.59.2")
+
 }

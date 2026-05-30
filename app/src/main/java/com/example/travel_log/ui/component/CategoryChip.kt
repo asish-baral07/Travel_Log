@@ -10,14 +10,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CategoryChip(
-    title: String,
-    selected: Boolean
-) {
+fun CategoryChip(title: String , selected: Boolean) {
 
     val bg =
         if (selected) Color(0xFF0B8B74)
-        else Color.White
+        else Color(0xFFF6EFED)
 
     val text =
         if (selected) Color.White
@@ -29,11 +26,12 @@ fun CategoryChip(
         modifier = Modifier
             .background(
                 bg,
-                RoundedCornerShape(50.dp)
+                RoundedCornerShape(16.dp)
             )
+
             .padding(
-                horizontal = 18.dp,
-                vertical = 10.dp
+                horizontal = 20.dp,
+                vertical = 7.dp
             )
     )
 }

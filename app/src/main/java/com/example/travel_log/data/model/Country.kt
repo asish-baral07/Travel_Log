@@ -1,7 +1,7 @@
 package com.example.travel_log.data.model
 
 data class Country(
-    val code: String?,
+    val code: String,
     val name: String,
     val capital: String,
     val region: String?,

@@ -1,11 +1,9 @@
 package com.example.travel_log.data.repository
 
-import android.icu.number.Precision.currency
 import com.example.travel_log.data.model.Country
-import com.example.travel_log.data.remote.CountryServiceApi
 import com.example.travel_log.data.remote.RetrofitInstance.api
 
-class CountryRepository() {
+class CountryRepository {
     suspend fun getAll(): List<Country> {
 
         return api.getCountries().map {

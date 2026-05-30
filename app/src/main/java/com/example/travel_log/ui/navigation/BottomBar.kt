@@ -1,7 +1,6 @@
 package com.example.travel_log.ui.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.Analytics
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
@@ -11,7 +10,6 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
@@ -22,8 +20,8 @@ fun BottomBar(navController: NavController) {
     val currentRoute = currentBackStackEntry.value?.destination?.route
     NavigationBar {
         NavigationBarItem(
-            selected = currentRoute == "discover",
-            onClick = {navController.navigate("discover")},
+            selected = currentRoute == Screen.Explore.route,
+            onClick = {navController.navigate(Screen.Explore.route)},
             icon = {
                 Icon(Icons.Outlined.Home, null)
             },
@@ -33,8 +31,8 @@ fun BottomBar(navController: NavController) {
         )
 
         NavigationBarItem(
-            selected = currentRoute == "tripscreen",
-            onClick = {navController.navigate("tripscreen")},
+            selected = currentRoute == Screen.Trip.route,
+            onClick = {navController.navigate(Screen.Trip.route)},
             icon = {
                 Icon(Icons.Outlined.List, null)
             },
@@ -44,8 +42,8 @@ fun BottomBar(navController: NavController) {
         )
 
         NavigationBarItem(
-            selected = false,
-            onClick = {},
+            selected = currentRoute == Screen.Stats.route,
+            onClick = { navController.navigate(Screen.Stats.route)},
             icon = {
                 Icon(Icons.Outlined.Analytics, null)
             },
@@ -55,8 +53,8 @@ fun BottomBar(navController: NavController) {
         )
 
         NavigationBarItem(
-            selected = false,
-            onClick = {},
+            selected = currentRoute == Screen.Setting.route,
+            onClick = { navController.navigate(Screen.Setting.route)},
             icon = {
                 Icon(Icons.Outlined.Settings, null)
             },
