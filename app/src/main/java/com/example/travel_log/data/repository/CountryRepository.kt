@@ -1,9 +1,12 @@
 package com.example.travel_log.data.repository
 
 import com.example.travel_log.data.model.Country
-import com.example.travel_log.data.remote.RetrofitInstance.api
+import com.example.travel_log.data.remote.CountryServiceApi
+import javax.inject.Inject
 
-class CountryRepository {
+class CountryRepository @Inject constructor(
+    private val api : CountryServiceApi
+) {
     suspend fun getAll(): List<Country> {
 
         return api.getCountries().map {

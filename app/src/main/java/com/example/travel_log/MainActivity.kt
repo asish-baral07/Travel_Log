@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowInsetsControllerCompat
@@ -22,15 +22,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent{
 
-            var isDarkTheme by remember { mutableStateOf(false) }
-                        // Detect current dark theme
-
-            // Get current activity window
-            val view = LocalView.current
+            var isDarkTheme by rememberSaveable { mutableStateOf(false) } // Detect current dark theme
+            val view = LocalView.current      // Get current activity window
 
             /*SideEffect runs after every recomposition
             Used for system UI updates.*/
-
             SideEffect {
                 // Controls status bar icon colors
                 WindowInsetsControllerCompat(window, view)

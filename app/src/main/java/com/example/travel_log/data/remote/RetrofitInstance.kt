@@ -1,3 +1,4 @@
+/*
 package com.example.travel_log.data.remote
 
 import retrofit2.Retrofit
@@ -14,3 +15,4 @@ object RetrofitInstance {
             .create(CountryServiceApi::class.java)
     }
 }
+*/

@@ -43,7 +43,6 @@ fun SettingScreen(
     onThemeChange : (Boolean) -> Unit  // call back function
 ) {
     Scaffold(
-        // Bottom navigation bar
         bottomBar = {
             BottomBar(navController)
         }
