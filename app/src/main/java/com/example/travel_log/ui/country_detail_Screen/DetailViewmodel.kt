@@ -34,7 +34,7 @@ class DetailViewModel @Inject constructor(
             )
         }
     }
-    // Check Wishlist Status, wheather country already exists in wishlist
+    // Check Wishlist Status, weather country already exists in wishlist
     fun checkWishlist(code : String){
         viewModelScope.launch {
             repository.isWishlist(code).collect { _isWishlist.value = it } // calls Dao query , if that returns false wishlist button becomes red else white

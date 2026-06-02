@@ -1,9 +1,5 @@
 package com.example.travel_log.ui.explore_screens
 
-//import com.example.travelapp.data.remote.api.CountryApiService
-//import com.example.travelapp.data.remote.repository.CountryRepositoryImpl
-//import com.example.travelapp.domain.model.Country
-//import com.example.travelapp.utils.Constants
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.travel_log.data.model.Country

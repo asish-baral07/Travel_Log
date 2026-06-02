@@ -1,9 +1,9 @@
 package com.example.travel_log.ui.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.Analytics
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -34,7 +34,7 @@ fun BottomBar(navController: NavController) {
             selected = currentRoute == Screen.Trip.route,
             onClick = {navController.navigate(Screen.Trip.route)},
             icon = {
-                Icon(Icons.Outlined.List, null)
+                Icon(Icons.AutoMirrored.Outlined.List, null)
             },
             label = {
                 Text("Trips")

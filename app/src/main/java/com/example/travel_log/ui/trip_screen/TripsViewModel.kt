@@ -31,7 +31,6 @@ class TripsViewModel @Inject constructor(   // Hilt automatically injects TripRe
                 SharingStarted.WhileSubscribed(),
                 emptyList()
             )
-
     val visitedTrips =
         repository.getVisitedTrips()
             .stateIn(
