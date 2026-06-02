@@ -1,4 +1,4 @@
-package com.example.travel_log.ui.details_screen
+package com.example.travel_log.ui.country_detail_Screen
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -46,7 +46,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.travel_log.data.model.Country
-import com.example.travel_log.ui.country_detail_Screen.DetailViewModel
 import com.example.travel_log.ui.navigation.BottomBar
 
 @Composable

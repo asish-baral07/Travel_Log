@@ -34,6 +34,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -128,6 +129,7 @@ fun ExploreScreen(
                 }
             }
                 Spacer(modifier = Modifier.height(20.dp))
+
                 // Popular Banner
                 if (filteredCountries.isNotEmpty()) {
                     PopularBanner(filteredCountries.first())
@@ -139,7 +141,8 @@ fun ExploreScreen(
                 ) {
                     Text(
                         "Trending Destinations",
-                        style = MaterialTheme.typography.titleLarge
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.SemiBold
                     )
                     Text("See all")
                 }

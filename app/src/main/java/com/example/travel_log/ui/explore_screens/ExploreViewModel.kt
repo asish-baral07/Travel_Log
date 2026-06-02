@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 class ExploreViewModel @Inject constructor(
     private val repository: CountryRepository
 ) : ViewModel() {
-    // private val repository = CountryRepository() // view model gets repository access
+    // private val repository = CountryRepository()
     private val _countries = MutableStateFlow<List<Country>>(emptyList())
     val state: StateFlow<List<Country>> = _countries
 

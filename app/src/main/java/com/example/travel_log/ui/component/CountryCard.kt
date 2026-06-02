@@ -1,7 +1,5 @@
 package com.example.travel_log.ui.component
 
-import android.R.attr.country
-import android.icu.number.Precision.currency
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -14,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,7 +37,8 @@ fun CountryCard(
             .width(170.dp)
             .padding(6.dp)
             .clickable{ onClick() },
-        shape = RoundedCornerShape(24.dp)
+        shape = RoundedCornerShape(24.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
     ) {
 
         Column {

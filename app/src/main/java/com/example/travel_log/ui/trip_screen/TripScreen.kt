@@ -20,7 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -49,7 +49,7 @@ fun MyTripsScreen(
     val wishlistCount by viewModel.wishlistCount.collectAsState()
     val visitedCount by viewModel.visitedCount.collectAsState()
     // Current selected tab
-    var selectedTab by remember { mutableStateOf(0) }
+    var selectedTab by remember { mutableIntStateOf(0) }
 
     // Screen layout
     Scaffold(
@@ -66,7 +66,7 @@ fun MyTripsScreen(
             // Screen title
             Text(
                 text = "My Trips",
-                style = MaterialTheme.typography.headlineMedium, // apply predefined typography style
+                style = MaterialTheme.typography.headlineLarge, // apply predefined typography style
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
@@ -81,7 +81,8 @@ fun MyTripsScreen(
                         RoundedCornerShape(20.dp)
                     )
                     .padding(vertical = 24.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.SpaceEvenly,
+
             ) {
 
                 // Planned count
@@ -131,7 +132,7 @@ fun MyTripsScreen(
                         selectedTab = 2
                     },
                     text = {
-                        Text("visited")
+                        Text("Visited")
                     }
                 )
             }

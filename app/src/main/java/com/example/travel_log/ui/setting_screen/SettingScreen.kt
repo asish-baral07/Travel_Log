@@ -88,7 +88,6 @@ fun SettingScreen(
                         ) {
                             Text(
                                 text = "Asish Baral",
-                                //color = Color.White,
                                 color = MaterialTheme.colorScheme.onBackground,
                                 fontSize = 22.sp,
                                 fontWeight = FontWeight.Bold
@@ -109,17 +108,12 @@ fun SettingScreen(
                             Icon(
                                 imageVector = Icons.Default.Edit,
                                 contentDescription = "Edit",
-                                //tint = Color.White,
                                 tint = MaterialTheme.colorScheme.onBackground
                             )
                         }
                     }
                 }
-
-            // Space
-                Spacer(modifier = Modifier.height(20.dp))
-
-
+             Spacer(modifier = Modifier.height(20.dp))
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(20.dp),
@@ -138,13 +132,11 @@ fun SettingScreen(
                             Icon(
                                 imageVector = Icons.Default.DarkMode,
                                 contentDescription = "Dark Mode",
-                                //tint = Color.White
                                 tint = MaterialTheme.colorScheme.onBackground
                             )
                             Spacer(modifier = Modifier.width(12.dp))
                             Text(
                                 text = "Dark Mode",
-                                //color = Color.White,
                                 color = MaterialTheme.colorScheme.onBackground,
                                 fontSize = 18.sp
                             )
@@ -157,7 +149,6 @@ fun SettingScreen(
                     }
                 }
                 Spacer(modifier = Modifier.height(20.dp))
-
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(20.dp),
@@ -176,27 +167,22 @@ fun SettingScreen(
                             Icon(
                                 imageVector = Icons.Default.Info,
                                 contentDescription = "About App",
-                                //tint = Color.White
-
                                 tint = MaterialTheme.colorScheme.onBackground
                             )
                             Spacer(modifier = Modifier.width(12.dp))
                             Text(
                                 text = "App Version",
-                                //color = Color.White,
                                 color = MaterialTheme.colorScheme.onBackground,
                                 fontSize = 18.sp
                             )
                         }
                         Text(
                             text = "1.0.0",
-                            //color = Color.LightGray
                             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
                         )
                     }
                 }
                 Spacer(modifier = Modifier.height(40.dp))
-
         }
     }
 }

@@ -47,7 +47,7 @@ object AppModule {  // Singleton Object
     @Provides
     @Singleton
     fun provideCountryServiceApi(retrofit: Retrofit): CountryServiceApi {
-        return retrofit.create(CountryServiceApi::class.java)
+        return retrofit.create(CountryServiceApi::class.java) // create implementation of API interface, so retrofit generates this implementation
 
     }
 }

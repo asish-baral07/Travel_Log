@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.travel_log.ui.details_screen.DetailContent
+import com.example.travel_log.ui.country_detail_Screen.DetailContent
 import com.example.travel_log.ui.explore_screens.ExploreScreen
 import com.example.travel_log.ui.explore_screens.ExploreViewModel
 import com.example.travel_log.ui.setting_screen.SettingScreen

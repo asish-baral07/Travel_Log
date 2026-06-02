@@ -1,7 +1,5 @@
 package com.example.travel_log.ui.component
 
-import android.R.attr.country
-import android.icu.number.Precision.currency
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,12 +23,11 @@ import com.example.travel_log.data.model.Country
 
 @Composable
 fun PopularBanner(country: Country) {
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(180.dp)
-            .clip(RoundedCornerShape(16.dp))
+            .height(170.dp)
+            .clip(RoundedCornerShape(16.dp)),
     ) {
 
         AsyncImage(
@@ -52,7 +49,6 @@ fun PopularBanner(country: Country) {
                     )
                 )
         )
-
         Column(
             modifier = Modifier
                 .align(Alignment.BottomStart)

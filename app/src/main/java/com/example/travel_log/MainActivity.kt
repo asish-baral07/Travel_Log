@@ -21,8 +21,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent{
-
-            var isDarkTheme by rememberSaveable { mutableStateOf(false) } // Detect current dark theme
+            var isDarkTheme by rememberSaveable { mutableStateOf(false) } 
             val view = LocalView.current      // Get current activity window
 
             /*SideEffect runs after every recomposition

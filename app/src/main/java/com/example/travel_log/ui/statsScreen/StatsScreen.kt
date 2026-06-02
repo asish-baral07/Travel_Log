@@ -98,7 +98,8 @@ fun StatsScreen(
                 shape = RoundedCornerShape(22.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = Color(0xFF00796B)
-                )
+                ),
+                elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
             ) {
 
                 Column(
@@ -160,7 +161,8 @@ fun StatsScreen(
             // EXTRA ANALYTICS
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(20.dp)
+                shape = RoundedCornerShape(20.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 7.dp)
             ) {
 
                 Column(
