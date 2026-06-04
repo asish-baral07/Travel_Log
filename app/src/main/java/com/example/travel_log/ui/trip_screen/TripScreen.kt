@@ -84,7 +84,6 @@ fun MyTripsScreen(
                 horizontalArrangement = Arrangement.SpaceEvenly,
 
             ) {
-
                 // Planned count
                 StatsItem(
                     count = plannedCount,
@@ -141,12 +140,9 @@ fun MyTripsScreen(
                 modifier = Modifier.fillMaxSize()
            ) {
                 when(selectedTab){
-
                     // Planned Tab
                     0 -> {  // Shows planned trips
-
                         items(plannedTrips){ trip -> // current item
-
                             TripCard(
                                 trip = trip,
                                 buttonText = "Mark as Visited",
@@ -159,9 +155,7 @@ fun MyTripsScreen(
 
                     // Wishlist Tab
                     1 -> {
-
                         items(wishlistTrips){ trip ->
-
                             TripCard(
                                 trip = trip,
                                 buttonText = "Plan Trip",
@@ -171,16 +165,15 @@ fun MyTripsScreen(
                             )
                         }
                     }
-
                     // Visited Tab
                     2 -> {
-
                         items(visitedTrips){ trip ->
-
                             TripCard(
                                 trip = trip,
                                 buttonText = "",
-                                onButtonClick = { }
+                                onButtonClick = {
+
+                                }
                             )
                         }
                     }

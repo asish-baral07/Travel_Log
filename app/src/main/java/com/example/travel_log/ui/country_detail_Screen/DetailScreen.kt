@@ -53,7 +53,6 @@ fun DetailContent(country: Country,
                   navController: NavController,
                   viewModel: DetailViewModel = hiltViewModel()
 ) {
-    // observe state
     val isWishlist by viewModel.isWishlist.collectAsState()
 
     // check database when screen opens
@@ -79,7 +78,6 @@ fun DetailContent(country: Country,
                     .height(350.dp)
                     .background(Color(0xFF006D5B))
             ) {
-
                 AsyncImage(
                     model = country.flags,
                     contentDescription = null,
@@ -180,25 +178,16 @@ fun DetailContent(country: Country,
                         horizontalArrangement =
                             Arrangement.spacedBy(12.dp)
                     ) {
-
                         InfoCard(
-
                             title = country.currencies ?: "",
-
                             subtitle = "Currency"
                         )
-
                         InfoCard(
-
                             title = country.languages,
-
                             subtitle = "Language"
                         )
-
                         InfoCard(
-
                             title = "GMT",
-
                             subtitle = "Timezone"
                         )
                     }

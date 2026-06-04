@@ -81,4 +81,10 @@ class TripsViewModel @Inject constructor(   // Hilt automatically injects TripRe
                 )
         }
     }
+    // Delete country from visitedTab
+//    fun deleteVisited(trip: TripEntity){
+//        viewModelScope.launch {
+//            repository.deleteTrip(trip.countryCode)
+//        }
+//    }
 }

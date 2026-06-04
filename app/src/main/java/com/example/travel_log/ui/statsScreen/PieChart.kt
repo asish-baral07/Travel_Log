@@ -110,13 +110,11 @@ fun LegendItem(
     Row(
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-
         Canvas(
             modifier = Modifier.size(16.dp)
         ) {
             drawCircle(color = color)  // Draws a small dot representing the category color
         }
-
         Text(
             text = text,
             fontSize = 16.sp,

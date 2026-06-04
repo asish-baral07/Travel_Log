@@ -19,10 +19,11 @@ class DetailViewModel @Inject constructor(
     private val repository: TripRepository // injects repository into viewmodel
 ) : ViewModel() {
     private val _isWishlist = MutableStateFlow(false)
+
     val isWishlist = _isWishlist.asStateFlow() // makes isWishlist to read-only stateflow.
     fun addPlannedTrip(country: Country) { // Add selected country object into Planned tab
         viewModelScope.launch {
-            repository.insertTrip( // calls repository
+            repository.insertTrip(
                 TripEntity(
                     countryCode = country.code,
                     countryName = country.name,
@@ -37,7 +38,7 @@ class DetailViewModel @Inject constructor(
     // Check Wishlist Status, weather country already exists in wishlist
     fun checkWishlist(code : String){
         viewModelScope.launch {
-            repository.isWishlist(code).collect { _isWishlist.value = it } // calls Dao query , if that returns false wishlist button becomes red else white
+            repository.isWishlist(code).collect { _isWishlist.value = it } // calls Dao query , if that returns false wishlist button becomes white else red
         }
     }
     // Toggle Function : Checks current status, If exist -> remove || If not exists -> insert to wishlist tab

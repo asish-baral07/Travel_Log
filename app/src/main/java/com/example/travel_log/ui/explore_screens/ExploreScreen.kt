@@ -50,8 +50,7 @@ fun ExploreScreen(
     onCountryClick : (Country) -> Unit,
     navController: NavController
 ) {
-
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState() //Take the data (state) from the ViewModel and observe it as Compose state so the UI updates automatically
     var searchText by remember { mutableStateOf("") } // For Search Bar
     var selectedRegion by remember { mutableStateOf("All") } // for 4 buttons
 
@@ -144,7 +143,7 @@ fun ExploreScreen(
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.SemiBold
                     )
-                    Text("See all")
+
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 LazyVerticalGrid(

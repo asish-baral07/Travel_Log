@@ -8,8 +8,6 @@ import androidx.room.TypeConverters
 @TypeConverters(Converters::class)
 /* @TypeConverters - used when room cannot store custom data types directly,
                      Used to convert unsupported data types into supported database types
-    Room can store : String, Int, etc.
-    but can't directly store - Date, List, Custom Objects
 */
 abstract class TripDatabase: RoomDatabase(){
     abstract fun tripDao(): TripDao

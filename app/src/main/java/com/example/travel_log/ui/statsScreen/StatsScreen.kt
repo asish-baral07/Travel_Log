@@ -14,6 +14,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -123,79 +124,64 @@ fun StatsScreen(
                     Spacer(modifier = Modifier.height(14.dp))
 
                     LinearProgressIndicator(
-                        progress = progress,
+                        progress = { progress },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(10.dp),
                         color = Color.White,
-                        trackColor = Color.White.copy(alpha = 0.3f)
+                        trackColor = Color.White.copy(alpha = 0.3f),
+                        strokeCap = ProgressIndicatorDefaults.LinearStrokeCap, // Defines shape of the ends of the progress bar
                     )
                 }
             }
-
             Spacer(modifier = Modifier.height(28.dp))
-
             Text(
                 text = "Trips Overview",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
-
             Spacer(modifier = Modifier.height(30.dp))
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
-
                 PieChart(
                     visited = visitedTrips.size.toFloat(),
                     wishlist = wishlistTrips.size.toFloat(),
                     planned = plannedTrips.size.toFloat()
                 )
             }
-
             Spacer(modifier = Modifier.height(28.dp))
-
             // EXTRA ANALYTICS
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(20.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 7.dp)
             ) {
-
                 Column(
                     modifier = Modifier.padding(18.dp)
                 ) {
-
                     Text(
                         text = "Travel Analytics",
                         fontWeight = FontWeight.Bold,
                         fontSize = 22.sp
                     )
-
                     Spacer(modifier = Modifier.height(18.dp))
-
                     AnalyticsRow(
                         label = "Total Trips",
                         value = totalTrips.toString()
                     )
-
                     AnalyticsRow(
                         label = "Visited Countries",
                         value = visitedTrips.size.toString()
                     )
-
                     AnalyticsRow(
                         label = "Continents Covered",
                         value = continentsCovered.toString()
                     )
                 }
             }
-
-
         }
     }
-
 }
