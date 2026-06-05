@@ -22,9 +22,7 @@ class ExploreViewModel @Inject constructor(
         getCountries()
     }
     private fun getCountries() {
-
         viewModelScope.launch {
-
             _countries.value = repository.getAll()
         }
     }

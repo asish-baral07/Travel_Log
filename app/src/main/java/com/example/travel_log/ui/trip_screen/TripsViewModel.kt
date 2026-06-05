@@ -13,15 +13,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TripsViewModel @Inject constructor(   // Hilt automatically injects TripRepository
+class TripsViewModel @Inject constructor(
     private val repository: TripRepository
 ) : ViewModel() {
 
     val plannedTrips =
-        repository.getPlannedTrips() // repository fetches planned trips from Room Database
-            .stateIn( // stateIn() converts a Flow -> StateFlow
-                viewModelScope, // lifecycle aware, when viewModel destroy ,viewModelScope also destroy
-                SharingStarted.WhileSubscribed(), // Starts only when UI observes it, Stops when no one is observing
+        repository.getPlannedTrips()
+            .stateIn(
+                viewModelScope,
+                SharingStarted.WhileSubscribed(),
                 emptyList()
             )
     val wishlistTrips =
@@ -39,14 +39,13 @@ class TripsViewModel @Inject constructor(   // Hilt automatically injects TripRe
                 emptyList()
             )
     val plannedCount =
-        plannedTrips.map { it.size } //{ it.size } -> transforms trip list into count integer
-            // it -> means List<TripEntity>, size -> Gets total number of trips
+        plannedTrips.map { it.size }
             .stateIn(
                 viewModelScope,
                 SharingStarted.WhileSubscribed(),
                 0 // count starts from 0
             )
-    // Counts Wishlist countries
+
     val wishlistCount =
         wishlistTrips
             .map { it.size }
@@ -65,7 +64,6 @@ class TripsViewModel @Inject constructor(   // Hilt automatically injects TripRe
                 0
             )
 
-    // move a country into visited tab
     fun moveToVisited(trip : TripEntity){
         viewModelScope.launch {
             repository.deleteTrip(trip.countryCode)
@@ -77,14 +75,8 @@ class TripsViewModel @Inject constructor(   // Hilt automatically injects TripRe
     fun moveToPlanned(trip: TripEntity){
         viewModelScope.launch {
             repository.deleteTrip(trip.countryCode)
-                repository.insertTrip(trip.copy(type = TripType.PLANNED) // Copy -> Creates a new trip object with updated type
+                repository.insertTrip(trip.copy(type = TripType.PLANNED)
                 )
         }
     }
-    // Delete country from visitedTab
-//    fun deleteVisited(trip: TripEntity){
-//        viewModelScope.launch {
-//            repository.deleteTrip(trip.countryCode)
-//        }
-//    }
 }

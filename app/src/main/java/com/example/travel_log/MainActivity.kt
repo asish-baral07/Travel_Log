@@ -22,10 +22,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent{
             var isDarkTheme by rememberSaveable { mutableStateOf(false) } 
-            val view = LocalView.current      // Get current activity window
+            val view = LocalView.current
 
-            /*SideEffect runs after every recomposition
-            Used for system UI updates.*/
             SideEffect {
                 // Controls status bar icon colors
                 WindowInsetsControllerCompat(window, view)

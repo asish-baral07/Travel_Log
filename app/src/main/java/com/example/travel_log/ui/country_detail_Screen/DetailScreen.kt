@@ -55,16 +55,16 @@ fun DetailContent(country: Country,
 ) {
     val isWishlist by viewModel.isWishlist.collectAsState()
 
-    // check database when screen opens
-    LaunchedEffect(Unit) {   // when DetailScreen opens runs only once
+
+    LaunchedEffect(Unit) {
         viewModel.checkWishlist(country.code) // check is this country already inside wishlist database or not
     }
     val context = LocalContext.current
+
     Scaffold(
         bottomBar ={ BottomBar(navController) }
     ) { paddingValues ->
         Column(
-
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
@@ -72,7 +72,6 @@ fun DetailContent(country: Country,
                 .padding(paddingValues),
         ) {
             Box(
-
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(350.dp)
@@ -165,16 +164,13 @@ fun DetailContent(country: Country,
                     Spacer(modifier = Modifier.height(10.dp))
 
                     Text(
-
                         text =
                             "${country.capital} • ${country.population}",
-
                         color =
                             MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(modifier = Modifier.height(20.dp))
                     Row(
-
                         horizontalArrangement =
                             Arrangement.spacedBy(12.dp)
                     ) {

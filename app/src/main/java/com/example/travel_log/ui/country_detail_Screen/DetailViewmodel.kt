@@ -11,17 +11,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-// private val repo = TripRepository() -  ViewModel get the access of TripRepository
-// so here we create repo object manually without using Hilt
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: TripRepository // injects repository into viewmodel
+    private val repository: TripRepository
 ) : ViewModel() {
     private val _isWishlist = MutableStateFlow(false)
-
-    val isWishlist = _isWishlist.asStateFlow() // makes isWishlist to read-only stateflow.
-    fun addPlannedTrip(country: Country) { // Add selected country object into Planned tab
+    val isWishlist = _isWishlist.asStateFlow()
+    fun addPlannedTrip(country: Country) {
         viewModelScope.launch {
             repository.insertTrip(
                 TripEntity(
@@ -35,13 +31,16 @@ class DetailViewModel @Inject constructor(
             )
         }
     }
-    // Check Wishlist Status, weather country already exists in wishlist
+
     fun checkWishlist(code : String){
         viewModelScope.launch {
-            repository.isWishlist(code).collect { _isWishlist.value = it } // calls Dao query , if that returns false wishlist button becomes white else red
+            repository.isWishlist(code).collect { _isWishlist.value = it }
         }
     }
     // Toggle Function : Checks current status, If exist -> remove || If not exists -> insert to wishlist tab
+
+
+
     fun toggleWishlist(country: Country){ // acts like on/off switch for wishlist button
         viewModelScope.launch {
             if (_isWishlist.value){

@@ -19,10 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.Language
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -50,9 +47,9 @@ fun ExploreScreen(
     onCountryClick : (Country) -> Unit,
     navController: NavController
 ) {
-    val state by viewModel.state.collectAsState() //Take the data (state) from the ViewModel and observe it as Compose state so the UI updates automatically
-    var searchText by remember { mutableStateOf("") } // For Search Bar
-    var selectedRegion by remember { mutableStateOf("All") } // for 4 buttons
+    val state by viewModel.state.collectAsState()
+    var searchText by remember { mutableStateOf("") }
+    var selectedRegion by remember { mutableStateOf("All") }
 
     val filteredCountries = state.filter { country ->
         val matchesSearch =
@@ -82,14 +79,6 @@ fun ExploreScreen(
                         text = "Explore",
                         style = MaterialTheme.typography.headlineLarge
                     )
-                }
-                Row {
-                    IconButton(onClick = {}) {
-                        Icon(Icons.Outlined.Search, null)
-                    }
-                    IconButton(onClick = {}) {
-                        Icon(Icons.Outlined.Language, null)
-                    }
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))

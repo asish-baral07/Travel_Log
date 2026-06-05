@@ -16,11 +16,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
-// Makes dependency available throughout application lifecycle
-// SingletonComponent - These objects live as long as app lives
-object AppModule {  // Singleton Object
+object AppModule {
     @Provides
-    @Singleton // Creates only ONE instance
+    @Singleton
     // To create and access database file we use context
     fun provideDatabase(@ApplicationContext context: Context): TripDatabase {
         return Room.databaseBuilder(
@@ -43,13 +41,11 @@ object AppModule {  // Singleton Object
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-
     @Provides
     @Singleton
     fun provideCountryServiceApi(retrofit: Retrofit): CountryServiceApi {
-        return retrofit.create(CountryServiceApi::class.java) // create implementation of API interface, so retrofit generates this implementation
+        return retrofit.create(CountryServiceApi::class.java) // create implementation of API, so retrofit generates this implementation
 
     }
 }
 
-// DatabaseModule is used to provide Room Database and DAO objects automatically throughout the app
